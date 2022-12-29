@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+# debian/rules
+# -*- makefile -*-
+
+export PYBUILD_NAME = tlpui
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/tlpui/usr/share/applications/
+	cp debian/tlpui.desktop debian/tlpui/usr/share/applications/
+
+override_dh_auto_test:
+	# -dh_auto_test

@@ -1,0 +1,120 @@
+From cfe3b14ac1073a5208f276efca3ee4d41f0a5d76 Mon Sep 17 00:00:00 2001
+From: Daniel <code@devmind.org>
+Date: Tue, 18 May 2021 10:27:33 +0200
+Subject: [PATCH] #93 * Fixed translation
+
+---
+ README.md                                     |   2 +-
+ .../de_DE/LC_MESSAGES/configdescriptions.mo   | Bin 29678 -> 29689 bytes
+ .../de_DE/LC_MESSAGES/configdescriptions.po   |   6 +++---
+ .../en_EN/LC_MESSAGES/configdescriptions.mo   | Bin 29678 -> 29689 bytes
+ .../en_EN/LC_MESSAGES/configdescriptions.po   |   6 +++---
+ 5 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/README.md b/README.md
+index dcc1535..1696600 100644
+--- a/README.md
++++ b/README.md
+@@ -9,7 +9,7 @@ Install and run instructions:
+ 
+ Current status:
+ 
+-* Supports TLP versions 0.8-1.4
++* Supports TLP versions 0.8-1.4(alpha)
+ * Configuration can be read and displayed
+ * Shows information about configuration changes (defaults/unsaved and dropin/user config)
+ * Changes can be saved with user and sudo permissions (e.g. /etc/default/tlp or /etc/tlp.conf)
+diff --git a/tlpui/lang/de_DE/LC_MESSAGES/configdescriptions.mo b/tlpui/lang/de_DE/LC_MESSAGES/configdescriptions.mo
+index 35f2da333c7bf1bd795b43274a333c25197e7495..896f74879b78b527d8f26f9e31198ea89da9906f 100644
+GIT binary patch
+delta 633
+zcmXZYJxE(o6u|KlDk$+I+87laydZ)K8b2yZIw^uWn4!2hh>htpK7GDdlSe~Q3{vP&
+zL6K5Wad2}hg{&2EkWPYBD%hc;K}x%d2;%=}hRg4s4>;%E|AoM9A@FUlGG~iOG9}W8
+zr&x#ASdTI%@)sJg8cS$yz(~<f)V`6T)94asQTwm(Io@CpgYzQW7(t!$bzX9E$mN7Y
+zC4N{C`Hovyg>gru1E)~y>&18nwf+Nj&;@?P0&1VTD6)zx*o=3mi#D-c2>Y=YN8Fr9
+zn9DMWC~l(0N7#<%7{Pm-#9Hs^MJ^r?ub~cXdn@t<`>_H~F^<2nM(ax=uka;myn(NA
+zKUYiy(jsFd!l(;O;W#c~H6EdU-5KgYJ0tQ8vsi`87{X83hr3vYXBfsyEXRKsz&z)d
+zx*h6mDIGA~U9q0N{LdF#JwwBGCNbk!Ch56;+H)K$ZG6u&t)s((#&ezbZ80+$jdup)
+to^QpBH9Ko1efypDSTor<%Qc_>r0Qy-LxU5>&X|N&6TbB(f1K*5cmNl5bYuVk
+
+delta 643
+zcmYk&J4ho@6vpurEYxU>Z-o`PAU2}-iU?x2AXuo2*w_SRc9M)vX2!|*s2oADbP*9O
+z>?~{-Vzp=^2!fy>Y_+n5jSDLxh=P^=uSsDs{N{Y;4Cmf?y^B2DMSkwb!lZ~8X^}5@
+zijDXeoA4R`V=N<5jjz~@QLA7Z>bc>fQ|M6JsOSG+E#6}k-*6A3bA>$za}vr4!7qXs
+zuFQ)Z<0e+&S6ieDCsFs;iuD%i{xRxB7r2QxsOOBV$SN*i8$O~wXg#NkV<-0GuoH^Z
+z@!}D5;|A*b2s`i`8}JFIvD_`($iPGDCDaRBJ&|4P#7aEHalFDB-Cy7m*n_%W#~IuW
+zi@^(y5|sIc15Dx=bqcHT2=%W!L%lGW6DdI(tI)$ZhB$yfunf<z4ll6+Z!v;-p5NNN
+zcz=88pz2KwCHnH$iS54R#JIX$+fkmoZ2HPgrBskHmEk&p@7gv|;HFI?UoBff=A)T&
+o7oG3Q$XH%<Vr1mw>reB(nVq$qoSHQPYsuXC*42{#m#(RN2P~C*q5uE@
+
+diff --git a/tlpui/lang/de_DE/LC_MESSAGES/configdescriptions.po b/tlpui/lang/de_DE/LC_MESSAGES/configdescriptions.po
+index 5400b06..9cc5249 100644
+--- a/tlpui/lang/de_DE/LC_MESSAGES/configdescriptions.po
++++ b/tlpui/lang/de_DE/LC_MESSAGES/configdescriptions.po
+@@ -2,7 +2,7 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: TLPUI\n"
+ "POT-Creation-Date: 2021-05-17 14:42+0200\n"
+-"PO-Revision-Date: 2021-05-17 14:42+0200\n"
++"PO-Revision-Date: 2021-05-18 10:25+0200\n"
+ "Last-Translator: \n"
+ "Language-Team: \n"
+ "Language: de\n"
+@@ -105,8 +105,8 @@ msgstr "SOUND_POWER_SAVE_CONTROLLER"
+ #: configschema.json.h:18
+ msgid "SOUND_POWER_SAVE_CONTROLLER__ID_DESCRIPTION"
+ msgstr ""
+-"ON – power off the controller together with the sound chip\n"
+-"OFF – controller remains active"
++"Disable controller too (HDA only): Y/N.\n"
++"Note: effective only when SOUND_POWER_SAVE_ON_AC/BAT is activated"
+ 
+ #: configschema.json.h:19
+ msgid "Disks__CATEGORY_TITLE"
+diff --git a/tlpui/lang/en_EN/LC_MESSAGES/configdescriptions.mo b/tlpui/lang/en_EN/LC_MESSAGES/configdescriptions.mo
+index bfc4c8084a4f580af8cd12d6090abd783ff13b67..4635252bfde847d64adcf7d3f3823eb91a29f1d1 100644
+GIT binary patch
+delta 633
+zcmXZYJxE(o6u|KlEL7r0)EE^UdZ84mps8P2;-m=L!3@R4L268&@!98lnmi0*X%N9d
+zL6K6>(xIE12w7Xip*RVmDCpp5kfN)IApTFA;qtrZ1J1ekwh*{41a^N^<ZKa1rbHU?
+z5bN+7>ro~}{z3y*;WL^WFjBM?wQr#42Xu+EsQp)1gLfFj;FQQFMo{PMOi50DbNNG}
+z0+&9C{K5^a#JD5Uf}^PQ)ndGbT0cM?bcV}VK<#s<MZVx?e2EXJi@spH5O!k+4!Ajy
+zFqZ`qQCvrj_pljHFoKUbg0<fN7rD4iyofrmX-4E5c4IjnVjM59TI;hS@399pUc)i`
+znJXp&X_0p%!l(<3;t<Ya74D&a-4W_QJ0ntpS**kb4B-lP;dd;>BMjp?mf;NsFwZ$v
+zH$xq-p1(D1Z({A8`Qy%w_P%~QlNfg_lk{9a?KzH>HooVX*Mt4N#&ezdrkELt##@7N
+t&$nX6nwYSXzCCCCtC{Si<(jXTsk-WDU+=K7GbW+cgl~P!@26VIp8yvTbYlPj
+
+delta 643
+zcmYk&J4ho@6vpurEYxU>Z-o`PAU2}-iU?x2AXuo2*w_SRc9M)vX2!|*s2oADbP*9O
+z>?~{-Vzp=^2!fy>Y_+n5jSDLxh=P^=uSsDs{N{Y;4Cmf?y^B2DMSkwb!lZ~8X^}5@
+zijDXeoA4R`V=N<5jjz~@QLA7Z>bc>fQ|M6JsOSG+E#6}k-*6A3bA>$za}vr4!7qXs
+zuFQ)Z<0e+&S6ieDCsFs;iuD%i{xRxB7r2QxsOOBV$SN*i8$O~wXg#NkV<-0GuoH^Z
+z@!}D5;|A*b2s`i`8}JFIvD_`($iPGDCDaRBJ&|4P#7aEHalFDB-Cy7m*n_%W#~IuW
+zi@^(y5|sIc15Dx=bqcHT2=%W!L%lGW6DdI(tI)$ZhB$yfunf<z4ll6+Z!v;-p5NNN
+zcz=88pz2KwCHnH$iS54R#JIX$+fkmoZ2HPgrBskHmEk&p@7gv|;HFI?UoBff=A)T&
+o7oG3Q$XH%<Vr1mw>reB(nVq$qoSHQPYsuXC*42{#m#(RN2P~C*q5uE@
+
+diff --git a/tlpui/lang/en_EN/LC_MESSAGES/configdescriptions.po b/tlpui/lang/en_EN/LC_MESSAGES/configdescriptions.po
+index 7e18558..74fcb46 100644
+--- a/tlpui/lang/en_EN/LC_MESSAGES/configdescriptions.po
++++ b/tlpui/lang/en_EN/LC_MESSAGES/configdescriptions.po
+@@ -2,7 +2,7 @@ msgid ""
+ msgstr ""
+ "Project-Id-Version: TLPUI\n"
+ "POT-Creation-Date: 2021-05-17 14:41+0200\n"
+-"PO-Revision-Date: 2021-05-17 14:42+0200\n"
++"PO-Revision-Date: 2021-05-18 10:24+0200\n"
+ "Last-Translator: \n"
+ "Language-Team: \n"
+ "Language: en\n"
+@@ -105,8 +105,8 @@ msgstr "SOUND_POWER_SAVE_CONTROLLER"
+ #: configschema.json.h:18
+ msgid "SOUND_POWER_SAVE_CONTROLLER__ID_DESCRIPTION"
+ msgstr ""
+-"ON – power off the controller together with the sound chip\n"
+-"OFF – controller remains active"
++"Disable controller too (HDA only): Y/N.\n"
++"Note: effective only when SOUND_POWER_SAVE_ON_AC/BAT is activated"
+ 
+ #: configschema.json.h:19
+ msgid "Disks__CATEGORY_TITLE"

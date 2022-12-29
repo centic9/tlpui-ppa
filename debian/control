@@ -1,0 +1,23 @@
+Source: tlpui
+Priority: optional
+Maintainer: Logix <logix@linuxuprising.com>
+Build-Depends: debhelper (>= 9),
+               dh-python,
+               python3-all,
+               python3-setuptools,
+               python3-gi,
+               gir1.2-gtk-3.0,
+               tlp
+Standards-Version: 4.2.1
+X-Python3-Version: >= 3.5
+Section: utils
+Homepage: https://github.com/d4nj1/TLPUI
+
+Package: tlpui
+Architecture: all
+Depends: tlp (>= 0.8), python3-gi, gir1.2-gtk-3.0, ${python3:Depends}, ${misc:Depends}
+Enhances: tlp
+Breaks: python3-tlpui
+Replaces: python3-tlpui
+Description: TLPUI
+ A GTK-UI to change TLP configuration files easily.

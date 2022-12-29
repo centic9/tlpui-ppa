@@ -1,0 +1,149 @@
+tlpui (1.5.0-5-1~kinetic) kinetic; urgency=medium
+
+  * New release
+
+ -- Logix <logix@linuxuprising.com>  Thu, 29 Dec 2022 21:43:53 +0000
+
+tlpui (1.5.0-1~hirsute) hirsute; urgency=medium
+
+  * New stable release
+
+ -- Logix <logix@linuxuprising.com>  Mon, 10 Jan 2022 10:51:44 +0000
+
+tlpui (1.4.0-1~xenial) xenial; urgency=medium
+
+  * New stable release
+
+ -- Logix <logix@linuxuprising.com>  Tue, 05 Oct 2021 10:12:29 +0000
+
+tlpui (1.4.0~alpha+git20210519~hirsute1) hirsute; urgency=medium
+
+  * Use latest git to fix bug in latest alpha
+
+ -- Logix <logix@linuxuprising.com>  Wed, 19 May 2021 10:31:21 +0000
+
+tlpui (1.4.0~alpha~xenial0) xenial; urgency=medium
+
+  * Moved to releases (no longer building from Git)
+  * Version 1.4.0-alpha brings support for TLP 1.4.0 (not yet
+    released)
+
+ -- Logix <logix@linuxuprising.com>  Tue, 18 May 2021 10:35:32 +0000
+
+tlpui (0.1.20210103-1~hirsute0) hirsute; urgency=medium
+
+  * Prepare for the upcoming Ubuntu 21.04
+
+ -- Logix <logix@linuxuprising.com>  Fri, 02 Apr 2020 14:44:18 +0000
+
+tlpui (0.1.20210103-1~groovy0) groovy; urgency=medium
+
+  * Update from git:
+    - Updated and new translations
+    - Small image fixes
+    - Changed config type and adjusted description
+  * Make depends require tlp >= 0.8  
+
+ -- Logix <logix@linuxuprising.com>  Mon, 04 Jan 2021 11:21:33 +0000
+
+tlpui (0.1.20200723-1~focal0) focal; urgency=medium
+
+  * Update from git:
+    - Use lsusb command instead of tlp-usblist to fix:
+      "No such file or directory: 'tlp-usblist' upon clicking
+       USB Blacklist,dialogue box doesn't appear"
+    - fixed mistakes in German translation   
+
+ -- Logix <logix@linuxuprising.com>  Thu, 23 Jul 2020 12:52:41 +0000
+
+tlpui (0.1.20200428-1~focal0) focal; urgency=medium
+
+  * Update from git:
+    - Apply bg and fg colors to fix theme coloring issues
+
+ -- Logix <logix@linuxuprising.com>  Wed, 29 Apr 2020 13:46:34 +0000
+
+tlpui (0.1.20200424-1~focal0) focal; urgency=medium
+
+  * Update from git:
+    - Fix css theme definitions
+    - Fix notebook selection on refresh
+
+ -- Logix <logix@linuxuprising.com>  Mon, 27 Apr 2020 10:45:19 +0000
+
+tlpui (0.1.20200218-1~bionic0) bionic; urgency=medium
+
+  * Update from git:
+    - Added support for TLP 1.3
+
+ -- Logix <logix@linuxuprising.com>  Tue, 18 Feb 2020 14:23:40 +0000
+
+tlpui (0.1.20190807-1~focal0) focal; urgency=medium
+
+  * Prepare for the upcoming Ubuntu 20.04
+
+ -- Logix <logix@linuxuprising.com>  Mon, 27 Jan 2020 13:34:26 +0000
+
+tlpui (0.1.20190807-1~eoan0) eoan; urgency=medium
+
+  * Prepare for the upcoming Ubuntu 19.10
+
+ -- Logix <logix@linuxuprising.com>  Mon, 23 Sep 2019 10:21:19 +0000
+
+tlpui (0.1.20190807-1~disco0) disco; urgency=medium
+
+  * Update from git:
+    -  Remove -g option for tlp-stat simple command as it requires 
+       extra permissions
+
+ -- Logix <logix@linuxuprising.com>  Wed, 07 Aug 2019 09:41:16 +0000
+
+tlpui (0.1.20190319-1~bionic0) bionic; urgency=medium
+
+  * Update from git:
+    -  Only use major in minor version for configschema
+
+ -- Logix <logix@linuxuprising.com>  Mon, 25 Mar 2019 14:32:26 +0000
+
+tlpui (0.1.20190312-1~disco0) disco; urgency=medium
+
+  * Update from git:
+    -  PCIE_ASPM default state is now set to false in TLP 1.2,
+       also set it to default in TLPUI
+
+ -- Logix <logix@linuxuprising.com>  Tue, 12 Mar 2019 10:04:36 +0000
+
+tlpui (0.1.20190311-1~xenial0) xenial; urgency=medium
+
+  * Update from git:
+    -  Provide config and schema support for TLP 1.2
+
+ -- Logix <logix@linuxuprising.com>  Mon, 11 Mar 2019 10:38:45 +0200
+
+tlpui (0.1.20190301-1~disco0) disco; urgency=medium
+
+  * Update from git:
+    -  TLP version 1.2 preparations added
+    -  Test case added
+    -  Settings file handling improved
+
+ -- Logix <logix@linuxuprising.com>  Tue, 01 Mar 2019 11:51:46 +0000
+
+tlpui (0.1~acc1286-1~disco0) disco; urgency=medium
+
+  * Update from git: Fixed setting disk device parameters when 
+    multiple devices available
+
+ -- Logix <logix@linuxuprising.com>  Tue, 08 Jan 2019 13:14:23 +0100
+
+tlpui (0.1~112769d-1~xenial3) xenial; urgency=medium
+
+  * Added breaks / replaces python3-tlpui (the deb generated automatically)
+
+ -- Logix <logix@linuxuprising.com>  Thu, 15 Nov 2018 14:16:32 +0100
+
+tlpui (0.1~112769d-1~disco2) disco; urgency=medium
+
+  * Packaged the app
+
+ -- Logix <logix@linuxuprising.com>  Tue, 13 Nov 2018 13:42:17 +0100
