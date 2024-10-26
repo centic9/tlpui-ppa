@@ -13,7 +13,7 @@ from . import errorui
 
 EXPECTED_ITEM_MISSING_TEXT = language.UH_('Expected item missing in config file')  # type: str
 UNKNOWN_CONFIG_VALUE_TEXT = language.UH_('Unknown config value detected')  # type: str
-SUDO_MISSING_TEXT = language.UH_('Install pkexec, gksu, gksudo, kdesu or kdesudo first.')  # type: str
+SUDO_MISSING_TEXT = language.UH_('Install pkexec, gksu, gksudo, kdesu or kdesudo first')  # type: str
 DEFAULT_STATE_TEXT = language.UH_('Default state:')  # type: str
 DEFAULT_VALUE_TEXT = language.UH_('Default value:')  # type: str
 CHANGED_STATE_TEXT = language.UH_('CHANGED')  # type: str
@@ -59,7 +59,7 @@ class StateImage:
     def warn_unknown_config_value(self, configvalue: str) -> None:
         """Add image and tooltip for unknown values."""
         self.stateimage.set_from_icon_name(constants.ICON_NAME_WARNING, Gtk.IconSize.BUTTON)
-        self.stateimage.set_tooltip_text('{}: {}'.format(UNKNOWN_CONFIG_VALUE_TEXT, configvalue))
+        self.stateimage.set_tooltip_text(f'{UNKNOWN_CONFIG_VALUE_TEXT}: {configvalue}')
 
     def refresh(self, value: str, store: str, enabled: bool, enabledstore: bool) -> None:
         """Refresh image and description by changed state."""
@@ -69,31 +69,31 @@ class StateImage:
 
         enabledtext = ''
         if enabled != self.defaultstate:
-            enabledtext += '{} {}'.format(DEFAULT_STATE_TEXT, str(self.defaultstate))
+            enabledtext += f'{DEFAULT_STATE_TEXT} {str(self.defaultstate)}'
 
         if value == self.defaultvalue:
             if not changed and enabledtext == '':
                 self.stateimage.clear()
             elif not changed and enabledtext != '':
                 self.stateimage.set_from_icon_name(constants.ICON_NAME_INFO, Gtk.IconSize.BUTTON)
-                self.stateimage.set_tooltip_text('{}'.format(enabledtext))
+                self.stateimage.set_tooltip_text(f'{enabledtext}')
             elif changed and enabledtext == '':
                 self.stateimage.set_from_icon_name(constants.ICON_NAME_UNDO, Gtk.IconSize.BUTTON)
-                self.stateimage.set_tooltip_text('{}'.format(CHANGED_STATE_TEXT))
+                self.stateimage.set_tooltip_text(f'{CHANGED_STATE_TEXT}')
             elif changed and enabledtext != '':
                 self.stateimage.set_from_icon_name(constants.ICON_NAME_UNDO, Gtk.IconSize.BUTTON)
-                self.stateimage.set_tooltip_text('{}\n{}'.format(CHANGED_STATE_TEXT, enabledtext))
+                self.stateimage.set_tooltip_text(f'{CHANGED_STATE_TEXT}\n{enabledtext}')
         else:
-            defaulttext = '{} {}'.format(DEFAULT_VALUE_TEXT, self.defaultvalue)
+            defaulttext = f'{DEFAULT_VALUE_TEXT} {self.defaultvalue}'
             if not changed and enabledtext == '':
                 self.stateimage.set_from_icon_name(constants.ICON_NAME_INFO, Gtk.IconSize.BUTTON)
                 self.stateimage.set_tooltip_text(defaulttext)
             elif not changed and enabledtext != '':
                 self.stateimage.set_from_icon_name(constants.ICON_NAME_INFO, Gtk.IconSize.BUTTON)
-                self.stateimage.set_tooltip_text('{}\n{}'.format(enabledtext, defaulttext))
+                self.stateimage.set_tooltip_text(f'{enabledtext}\n{defaulttext}')
             elif changed and enabledtext == '':
                 self.stateimage.set_from_icon_name(constants.ICON_NAME_UNDO, Gtk.IconSize.BUTTON)
-                self.stateimage.set_tooltip_text('{}\n{}'.format(CHANGED_STATE_TEXT, defaulttext))
+                self.stateimage.set_tooltip_text(f'{CHANGED_STATE_TEXT}\n{defaulttext}')
             elif changed and enabledtext != '':
                 self.stateimage.set_from_icon_name(constants.ICON_NAME_UNDO, Gtk.IconSize.BUTTON)
-                self.stateimage.set_tooltip_text('{}\n{}\n{}'.format(CHANGED_STATE_TEXT, enabledtext, defaulttext))
+                self.stateimage.set_tooltip_text(f'{CHANGED_STATE_TEXT}\n{enabledtext}\n{defaulttext}')

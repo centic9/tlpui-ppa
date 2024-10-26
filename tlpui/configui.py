@@ -7,16 +7,16 @@ from gi.repository import Gtk
 from collections import OrderedDict
 from . import settings
 from . import language
-from .ui_config_objects import gtkswitch, gtkentry, gtkselection, gtkmultiselection, gtkcheckbutton, gtkspinbutton,\
+from .ui_config_objects import gtkswitch, gtkentry, gtkselection, gtkmultiselection, gtkcheckbutton, gtkspinbutton, \
     gtktoggle, gtkusblist, gtkpcilist, gtkdisklist, gtkdisklistview
-from .file import ConfType, TlpConfig, get_json_schema_object
+from .file import ConfType, TlpConfig, get_yaml_schema_object
 from .uihelper import get_theme_image, StateImage, EXPECTED_ITEM_MISSING_TEXT
 
 
 def store_category_num(self, cat, cat_num: int):
     """Store selected config category."""
     settings.userconfig.activecategory = cat_num
-    #settings.userconfig.activeposition = self.get_children()[cat_num].get_vadjustment().get_value()
+    # settings.userconfig.activeposition = self.get_children()[cat_num].get_vadjustment().get_value()
     settings.active_scroll = self.get_children()[cat_num]
 
 
@@ -121,7 +121,7 @@ def create_item_box(configobjects: list, doc: str, grouptitle: str, window) -> G
 
     if len(configobjects) > 1:
         grouplabel = Gtk.Label()
-        grouplabel.set_markup(' <b>{}</b> '.format(language.CDT_(f"{grouptitle}__GROUP_TITLE")))
+        grouplabel.set_markup(f' <b>{grouptitle.replace("_", " ")}</b> ')
         grouplabel.set_use_markup(True)
         grouplabel.set_margin_bottom(12)
         grouplabel.set_halign(Gtk.Align.START)
@@ -171,7 +171,7 @@ def create_item_box(configobjects: list, doc: str, grouptitle: str, window) -> G
 
         # object label
         configlabel = Gtk.Label(xalign=0)
-        configlabel.set_markup(' <b>{}</b> '.format(language.CDT_(f"{configname}__ID_TITLE")))
+        configlabel.set_markup(f' <b>{configname}</b> ')
         configlabel.set_use_markup(True)
         configlabel.set_size_request(300, 0)
 
@@ -217,7 +217,7 @@ def get_tlp_categories(window) -> OrderedDict:
     """Get categories from TLP schema."""
     propertyobjects = OrderedDict()
 
-    categories = get_json_schema_object('categories')
+    categories = get_yaml_schema_object('categories')
     for category in categories:
         categoryname = category['name']
 
@@ -235,7 +235,7 @@ def get_tlp_categories(window) -> OrderedDict:
         configs = category['configs']
         for config in configs:
             grouptitle = ""
-            configobjects = list()
+            configobjects = []
 
             if 'group' in config:
                 grouptitle = config['group']
