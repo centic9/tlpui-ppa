@@ -7,15 +7,15 @@ from pathlib import Path
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from . import settings
 from . import language
+from . import __version__
 from .configui import create_config_box
 from .file import init_tlp_file_config, create_tmp_tlp_config_file, write_tlp_config, get_changed_properties
 from .statui import create_stat_box
 from .uihelper import get_flag_image, get_theme_image
-from . import __version__
 
 
 def reset_scroll_position() -> None:
-    """Reset the scroll position """
+    """Reset the scroll position."""
     settings.active_scroll.get_vadjustment().set_value(settings.userconfig.activeposition)
 
 
@@ -29,7 +29,7 @@ def window_key_events(self, event) -> None:
     """Add window key events like crtl+(q|w|s)."""
     if event.state & Gdk.ModifierType.CONTROL_MASK:
         # close window with ctrl+q or ctrl+w
-        if event.keyval == 113 or event.keyval == 119:
+        if event.keyval in (113, 119):
             quit_tlp_config(None, self)
         # save config with ctrl+s
         if event.keyval == 115:
@@ -97,7 +97,7 @@ def quit_tlp_config(_, window) -> None:
         window,
         tmpfilename,
         language.MT_('Unsaved settings'),
-        language.MT_('Do you really want to quit? No changes will be saved.'))
+        language.MT_('Do you really want to quit? No changes will be saved'))
 
     if quitresponse == Gtk.ResponseType.OK:
         Gtk.main_quit()
@@ -115,8 +115,10 @@ def changed_items_dialog(window, tmpfilename: str, dialogtitle: str, message: st
     scrolledwindow.set_hexpand(True)
     scrolledwindow.set_vexpand(True)
 
-    fromfilecontent = open(settings.tlpconfigfile, 'r').readlines()
-    tofilecontent = open(tmpfilename, 'r').readlines()
+    with open(settings.tlpconfigfile, encoding='utf-8') as fromfile:
+        fromfilecontent = fromfile.readlines()
+    with open(tmpfilename, encoding='utf-8') as tofile:
+        tofilecontent = tofile.readlines()
     diff = settings.tlpbaseconfigfile + '\n\n'
     for line in difflib.unified_diff(fromfilecontent, tofilecontent, n=0, lineterm=''):
         if line.startswith('---') or line.startswith('+++'):
@@ -136,7 +138,7 @@ def changed_items_dialog(window, tmpfilename: str, dialogtitle: str, message: st
 
     box = dialog.get_content_area()
     box.pack_start(scrolledwindow, True, True, 0)
-    box.pack_start(Gtk.Label('\n{}\n'.format(message)), False, False, 0)
+    box.pack_start(Gtk.Label(f'\n{message}\n'), False, False, 0)
 
     dialog.show_all()
     response = dialog.run()
@@ -158,11 +160,12 @@ def create_menu_box(window) -> Gtk.Box:
                 <menuitem name="en_EN" action='en_EN' />
                 <menuitem name="de_DE" action='de_DE' />
                 <menuitem name="es_ES" action='es_ES' />
+                <menuitem name="fr_FR" action='fr_FR' />
                 <menuitem name="pt_BR" action='pt_BR' />
                 <menuitem name="ru_RU" action='ru_RU' />
                 <menuitem name="tr_TR" action='tr_TR' />
                 <menuitem name="id_ID" action='id_ID' />
-                <menu name="zh_CN" action='zhSubMenu'>
+                <menu name="zh" action='zhSubMenu'>
                     <menuitem name="zh_CN" action='zh_CN' />
                     <menuitem name="zh_TW" action='zh_TW' />
                 </menu>
@@ -186,11 +189,14 @@ def create_menu_box(window) -> Gtk.Box:
     repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/en_EN"))
     repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/de_DE"))
     repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/es_ES"))
+    repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/fr_FR"))
     repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/pt_BR"))
     repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/ru_RU"))
     repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/tr_TR"))
     repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/id_ID"))
-    repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/zh_CN"))
+    repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/zh"))
+    repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/zh/zh_CN"), True)
+    repack_language_menuitem(uimanager.get_widget("/menubar/language_menu/zh/zh_TW"), True)
 
     menubox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
     menubox.pack_start(menubar, False, False, 0)
@@ -198,11 +204,12 @@ def create_menu_box(window) -> Gtk.Box:
     return menubox
 
 
-def repack_language_menuitem(menuitem: Gtk.MenuItem):
+def repack_language_menuitem(menuitem: Gtk.MenuItem, submenu=False):
     """Repack language menu items for better visibility."""
     menuitemname = menuitem.get_name()
     langimage = get_flag_image(menuitemname)
-    langlabel = Gtk.Label(menuitemname.split("_")[0])
+    lang_index = 1 if submenu else 0
+    langlabel = Gtk.Label(menuitemname.split("_")[lang_index].lower())
     langbox = Gtk.Box()
     langbox.pack_start(langimage, False, False, 12)
     langbox.pack_start(langlabel, False, False, 0)
@@ -212,7 +219,7 @@ def repack_language_menuitem(menuitem: Gtk.MenuItem):
 
 def create_settings_box(window) -> Gtk.Box:
     """Buttons for direct access in UI."""
-    fileentrylabel = Gtk.Label(settings.tlpbaseconfigfile)
+    fileentrylabel = Gtk.Label(f"TLP {settings.tlpversion} - {settings.tlpbaseconfigfile}")
     fileentrylabel.set_alignment(0, 0.5)
     reloadbutton = Gtk.Button(label=' ' + language.MT_('Reload'),
                               image=get_theme_image('view-refresh-symbolic', Gtk.IconSize.BUTTON))
@@ -235,9 +242,11 @@ def add_menu_actions(window, actiongroup) -> None:
     """Add actions to application menu."""
     actionfilemenu = Gtk.Action("FileMenu", language.MT_("File"), None, None)
     actiongroup.add_action(actionfilemenu)
+
     actionfilemenusave = Gtk.Action("save", language.MT_('Save'), None, Gtk.STOCK_SAVE)
     actionfilemenusave.connect("activate", save_tlp_config, window)
     actiongroup.add_action(actionfilemenusave)
+
     actionfilemenuquit = Gtk.Action("quit", language.MT_('Quit'), None, Gtk.STOCK_QUIT)
     actionfilemenuquit.connect("activate", quit_tlp_config, window)
     actiongroup.add_action(actionfilemenuquit)
@@ -272,16 +281,18 @@ def add_menu_actions(window, actiongroup) -> None:
 def show_about_dialog(self):
     """Applications about dialog."""
     aboutdialog = Gtk.AboutDialog()
-    aboutdialog.set_title("TLPUI")
+    aboutdialog.set_title("TLP-UI")
     aboutdialog.set_name("name")
     aboutdialog.set_version(__version__)
-    aboutdialog.set_comments("UI for TLP written in Python/GTK")
+    aboutdialog.set_comments(language.MT_("UI for TLP written in Python/Gtk"))
     aboutdialog.set_website("https://github.com/d4nj1/TLPUI")
-    aboutdialog.set_website_label("TLPUI on GitHub")
+    aboutdialog.set_website_label("TLP-UI @ GitHub")
     aboutdialog.set_authors(["Daniel Christophis"])
     aboutdialog.set_translator_credits("Muhammet Emin AKALAN (05akalan57@gmail.com)")
     aboutdialog.set_license_type(Gtk.License.GPL_2_0)
-    aboutdialog.set_logo(GdkPixbuf.Pixbuf.new_from_file_at_size(f"{settings.icondir}themeable/hicolor/scalable/apps/tlpui.svg", width=128, height=128))
+    aboutdialog.set_logo(GdkPixbuf.Pixbuf.new_from_file_at_size(
+        f"{settings.icondir}themeable/hicolor/scalable/apps/tlpui.svg", width=128, height=128)
+    )
     aboutdialog.connect('response', lambda dialog, fata: dialog.destroy())
     aboutdialog.show_all()
 

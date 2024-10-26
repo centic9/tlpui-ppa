@@ -4,11 +4,11 @@ Author:
 
 Copyrights:
 
-    Copyright (c) 2021 Daniel Christophis
+    Copyright (c) 2024 Daniel Christophis
 
     Descriptions were adapted from
     - TLP (https://github.com/linrunner/TLP)
-         Copyright (c) 2021 by Thomas Koch
+         Copyright (c) 2024 by Thomas Koch
 
 License:
 
